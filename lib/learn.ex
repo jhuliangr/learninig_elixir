@@ -1,24 +1,27 @@
 defmodule Learn do
-  def concurrency do
-    pid = spawn(fn() -> loop() end)
-    pid2 = spawn(fn() -> loop() end)
+  def main do
+    # string variables
+    str = "..to print.."
+    longer_str = str <> " now " <> "is longer "
 
-    send(pid, {:resend, 10})
-    send(pid2, {:resend, 20})
+    # function calling
+    Strings.main(str, longer_str)
+    mod()
+    Conditionals.main(str, longer_str)
+    TuplesAndLists.main()
+    Maps.main()
+    LambdasAndFunctions.main()
+    ExceptionHandling.main()
+    ThreadsAndConcurrency.main()
+
+    # IO test
+    IO.puts("----------------------------IO test--------------------------")
+    name = IO.gets("Put your name\n") |> String.trim()
+    "Hello #{name}" |> IO.puts()
   end
-  def loop() do
-    receive do
-      {:resend, 0} -> 
-        IO.puts "Done"
-      {:resend, number} -> 
-        send(self(), {:resend, number-1})
-        IO.puts "--> #{number}"
-        loop()
-    after
-      200 -> IO.puts "Time Up"
-    end
-  end
+
+  # simple test of modularization
   def mod do
-    Mo.imprimir() 
+    Mo.imprimir()
   end
 end
